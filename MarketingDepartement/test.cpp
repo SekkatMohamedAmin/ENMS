@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-    Marketing_departement m1(1000,"Berlin","Berlin");
+    Marketing_departement m1(1000,"algiers","zeralda");
     Marketing_departement m2(m1);
     m1.print();
     m2.print();

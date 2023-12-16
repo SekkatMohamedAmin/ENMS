@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 Marketing_departement::Marketing_departement(Marketing_departement &obj)
 {
     Current_budget = obj.Current_budget;

@@ -21,7 +21,6 @@ class Marketing_departement
 
 
     public:
-        Marketing_departement(Marketing_departement &obj);
         Marketing_departement(double budget , string region,string city);
         void Set_Current_budget(double);
         void Set_Start_Budget(double);
@@ -35,7 +34,7 @@ class Marketing_departement
         int Get_total_number_of_households();
         
         void print();
-        
+
 
 
         ~Marketing_departement();
