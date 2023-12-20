@@ -6,15 +6,6 @@
 using namespace std;
 
 
-Marketing_departement::Marketing_departement(Marketing_departement &obj)
-{
-    Current_budget = obj.Current_budget;
-    Budget_spent = obj.Budget_spent;
-    Start_Budget = obj.Start_Budget;
-    Marketing_departement_city = obj.Marketing_departement_city;
-    Marketing_departement_region = obj.Marketing_departement_region;
-    total_number_of_households = obj.total_number_of_households;
-}
 
 Marketing_departement::Marketing_departement(double budget , string region,string city)
 {
@@ -79,3 +70,29 @@ void Marketing_departement::print()
     cout << "Start budget : " << Start_Budget << endl;
     cout << "Total number of households : " << total_number_of_households << endl;
 }
+void Marketing_departement::Set_Winning_Customer(Customer *customer)
+{
+    winningCustomer = customer;
+}
+void Marketing_departement::Set_Losing_Customer(Customer *customer)
+{
+    losingCustomer = customer;
+}
+Customer* Marketing_departement::Get_Winning_Customer()
+{
+    return winningCustomer;
+}
+Customer* Marketing_departement::Get_Losing_Customer()
+{
+    return losingCustomer;
+}
+void Marketing_departement::Reduce_Budgetby(double percentage)
+{
+    Current_budget = Current_budget - (Current_budget * percentage);
+}
+void Marketing_departement::Increase_Budgetby(double percentage)
+{
+    Current_budget = Current_budget + (Current_budget * percentage);
+}
+
+
