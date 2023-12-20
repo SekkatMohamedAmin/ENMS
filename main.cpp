@@ -7,7 +7,7 @@ int main(){
     crow::SimpleApp app;
     //end point application
     CROW_ROUTE(app, "/")([](){
-        auto page = crow::mustache::load_text("fancypage.html");
+        auto page = crow::mustache::load_text("index.html");
         return page;
 
         });
