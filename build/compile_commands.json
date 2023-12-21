@@ -1,8 +1,7 @@
 [
 {
-  "directory": "E:/ENMS/build",
-  "command": "C:\\PROGRA~2\\Dev-Cpp\\MinGW64\\bin\\G__~1.EXE  @CMakeFiles/CrowSample.dir/includes_CXX.rsp -g -o CMakeFiles\\CrowSample.dir\\Website\\main.cpp.obj -c E:\\ENMS\\Website\\main.cpp",
-  "file": "E:/ENMS/Website/main.cpp",
-  "output": "CMakeFiles/CrowSample.dir/Website/main.cpp.obj"
+  "directory": "/home/btwist/Desktop/crow/build",
+  "command": "/usr/bin/g++  -I/home/btwist/Desktop/crow/Website/../crow/include -I/home/btwist/Desktop/crow/Website/../boost_1_84_0 -g -o CMakeFiles/CrowSample.dir/main.cpp.o -c /home/btwist/Desktop/crow/Website/main.cpp",
+  "file": "/home/btwist/Desktop/crow/Website/main.cpp"
 }
 ]
