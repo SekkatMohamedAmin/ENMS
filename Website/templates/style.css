@@ -4,16 +4,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-.header{
-    background-color: rgb(0, 0, 0);
-    color: white;
-    text-align: center;
-    padding: 5px;
-    height:15%;
-    margin:0;
-    width:100%;
-
+:root {
+    --blue: #050f84;
+    --cerulean: #086788;
+    --jonquil: #F0C808;
+    --papaya: #FFF1D0;
+    --rojo: #cc2a27;
 }
+
 .choices{
     background-color: rgb(0, 0, 0);
     color: white;
@@ -30,7 +28,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(10, 115, 20);
+    background-color: var(--cerulean);
     border:1px solid black;
     height:100%;
 }
@@ -48,25 +46,25 @@
     width:100%;
 }
 .choices li a:hover{
-    background-color: rgb(0, 0, 0);
+    background-color: var(--blue);
 }
 .choices li a:active{
-    background-color: rgb(0, 0, 0);
+    background-color: var(--rojo);
 }
 .choices li a:visited{
-    background-color: rgb(0, 0, 0);
+    background-color: var(--jonquil);
 }
 footer{
-    background-color: rgb(123, 116, 116);
+    background-color: var(--blue);
     color: black;
     text-align: center;
     padding: 5px;
     height:5%;
     margin:0;
     width:100%;
-    position: absolute;
+    position: relative;
     bottom: 0;
-    padding :2%;
+    padding : 2%;
     height:15%;
     border: 2px solid rgb(123, 116, 116);
 }

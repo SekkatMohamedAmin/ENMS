@@ -1,131 +1,204 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>GoToBillingPage</title>
     <style>
-        /* Existing styles here */
+        /* defining var colors */
+        :root {
+            --blue: #050f84;
+            --cerulean: #086788;
+            --jonquil: #F0C808;
+            --papaya: #FFF1D0;
+            --rojo: #cc2a27;
+        }
 
         select,
         input[type="text"] {
-            width: 300px; /* Adjust the width as desired */
+            width: 300px;
             padding: 10px;
             margin-bottom: 15px;
         }
+
+        #customerId,
+        #Region,
+        #CustomerCity,
+        #CustomerDistrict {
+            width: 280px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            width: 150px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: var(--jonquil);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header {
+            background-color: var(--blue);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        h1 img {
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
+
 <body>
-    <!-- Existing HTML content -->
-    <div class="header" style="background-color: green;">
-        <h1 style="text-align: center; color: black; font-size: 40px;">Electricity Management System</h1>
+    <div class="header">
+        <h1> <img src="icons/thunder.png"> Electricity Management System <img src="icons/thunder.png"> </h1>
     </div>
 
     <form style="text-align: center;">
-        
+
         <h2>Customer Billing</h2>
-        <!-- //this form will be handled using crow in cpp
-        it contains the customer info that will be handles in cpp and retreiving them from customer class -->
-        
 
         <label for="customerId">Customer ID</label><br>
         <input type="text" id="customerId"><br>
 
-      
-            
-            <!-- Add more addresses as needed -->
-        </select><br>
         <label for="Region">Region </label><br>
-        <select id="Region">
-            <option value="North">North</option>
-            <option value="South">South</option>
-            <option value="East">East</option>
-            <option value="West">West</option>
+        <select id="Region" onchange="updateCities()">
+            <!-- Options will be dynamically loaded using JavaScript -->
         </select><br>
 
         <label for="CustomerCity">Customer City</label><br>
-        <select id="CustomerCity">
-            <!-- [
-            "Algiers", "Oran", "Constantine", "Annaba", "Batna",
-            "Blida", "Setif", "Chlef", "Djelfa", "Biskra",
-            "Tebessa", "Tlemcen", "Ouargla", "Bejaia", "Skikda",
-            "Tiaret", "Tizi Ouzou", "El Oued", "Béchar", "Mostaganem",
-            "Bordj Bou Arreridj", "El Achir", "Médéa", "Sidi Bel Abbès",
-            "Laghouat", "Mascara", "Tizi Gheniff", "Tiaret", "Oum el Bouaghi",
-            "Béjaïa", "Ain Temouchent", "Guelma", "Relizane", "Tamanrasset",
-            "El Bayadh", "Ghardaia", "Illizi", "Bechar", "Adrar",
-            "Ain Defla", "Tindouf", "Bouira", "El Taref", "Souk Ahras",
-            "Ghardaïa", "Mila", "Laghouat", "Tissemsilt", "Tizi Ouzou",
-            "Relizane", "Jijel", "Boumerdes", "Tipaza", "Skikda",
-            "Tébessa", "Béchar", "Adrar", "Djanet"
-        ] -->
-           
+        <select id="CustomerCity" onchange="updateDistricts()">
+            <!-- Options will be dynamically loaded using JavaScript -->
         </select><br>
+
         <label for="CustomerDistrict">Customer District</label><br>
-        <select id="CustomerDistrict" onclick="updateDistricts()">
-            
+        <select id="CustomerDistrict">
+            <!-- Options will be dynamically loaded using JavaScript -->
         </select><br>
 
         <input type="submit" value="Submit">
         <input type="reset" value="Reset">
 
+        <script> var jsonData; // Variable to store JSON data
 
+            async function fetchData() {
+                // Fetch data from JSON file
+                var response = await fetch("CityDistrict.json");
+                jsonData = await response.json();
+            }
 
-            <script>
-                async function updateDistricts() {
-                    var citySelect = document.getElementById("CustomerCity");
-                    var districtSelect = document.getElementById("CustomerDistrict");
-        
-                    // Clear existing options
-                    districtSelect.innerHTML = "";
-        
-                    // Get selected city
-                    var selectedCity = citySelect.value;
-        
-                    // Fetch districts from JSON file
-                    var response = await fetch("CityDistrict.json");
-                    var data = await response.json();
-        
-                    // Populate districts based on the selected city
-                    var districts = data[selectedCity] || [];
-                    districts.forEach(district => {
-                        addDistrictOption(district, districtSelect);
-                    });
-                }
-        
-                function addDistrictOption(districtName, selectElement) {
-                    var option = document.createElement("option");
-                    option.value = districtName;
-                    option.text = districtName;
-                    selectElement.add(option);
-                }
-        
-                // Fetch city options from JSON file
-                async function initializeCityOptions() {
-                    var citySelect = document.getElementById("CustomerCity");
-        
-                    // Fetch cities from JSON file
-                    var response = await fetch("CisyDistrict.json");
-                    var data = await response.json();
-        
-                    // Populate city options
-                    for (var city in data) {
-                        if (data.hasOwnProperty(city)) {
-                            addCityOption(city, citySelect);
-                        }
+            async function updateRegions() {
+                await fetchData();
+
+                var regionSelect = document.getElementById("Region");
+                regionSelect.innerHTML = ""; // Clear existing options
+
+                for (var region in jsonData) {
+                    if (jsonData.hasOwnProperty(region)) {
+                        addOption(region, regionSelect);
                     }
                 }
-        
-                function addCityOption(cityName, selectElement) {
-                    var option = document.createElement("option");
-                    option.value = cityName;
-                    option.text = cityName;
-                    selectElement.add(option);
-                }
-        
-                // Initialize city options
-                initializeCityOptions();
-            </script>
-            
 
+                // Update cities and districts based on the selected region
+                updateCities();
+            }
+
+            async function updateCities() {
+                var regionSelect = document.getElementById("Region");
+                var citySelect = document.getElementById("CustomerCity");
+
+                citySelect.innerHTML = ""; // Clear existing options
+
+                var selectedRegion = regionSelect.value;
+                var cities = Object.keys(jsonData[selectedRegion]) || [];
+
+                for (var city of cities) {
+                    addOption(city, citySelect);
+                }
+
+                // Update districts based on the selected city
+                updateDistricts();
+            }
+
+            function updateDistricts() {
+                var regionSelect = document.getElementById("Region");
+                var citySelect = document.getElementById("CustomerCity");
+                var districtSelect = document.getElementById("CustomerDistrict");
+
+                districtSelect.innerHTML = ""; // Clear existing options
+
+                var selectedRegion = regionSelect.value;
+                var selectedCity = citySelect.value;
+
+                var districts = jsonData[selectedRegion][selectedCity] || [];
+
+                for (var district of districts) {
+                    addOption(district, districtSelect);
+                }
+            }
+
+            function addOption(value, selectElement) {
+                var option = document.createElement("option");
+                option.value = value;
+                option.text = value;
+                selectElement.add(option);
+            }
+
+            // Initialize region options
+            updateRegions();
+        </script>
     </form>
 </body>
+
 </html>
+
+
+<!--the json file  {
+    "North-East": {
+          "Tizi Ouzou": ["Tizi Ouzou Centre", "Aïn El Hammam", "Azazga"],
+          "Algiers": ["Algiers Centre", "Bab El Oued", "Kouba"],
+          "Médéa": ["Médéa Centre", "Ouled Bouachra", "Tizi Mahdi"],
+          "El Tarf": ["El Tarf Centre", "Bouteldja", "Aïn El Assel"],
+          "Tébessa": ["Tébessa Centre", "El Ogla", "Bir El Ater"],
+          "Constantine": ["Constantine Centre", "Ibn Ziad", "El Khroub"],
+          "Skikda": ["Skikda Centre", "Aïn Zouit", "Oued Zhour"],
+          "Sétif": ["Sétif Centre", "Bir El Kebir", "Aïn Abessa"],
+          "Jijel": ["Jijel Centre", "El Aouana", "Kaous"],
+          "Béjaïa": ["Béjaïa Centre", "Tichy", "Amizour"]
+        },
+        "North-West": {
+          "Mostaganem": ["Mostaganem Centre", "Achaacha", "Hadjadj"],
+          "Mascara": ["Mascara Centre", "El Ghomri", "Tizi"],
+          "Oran": ["Oran Centre", "Bir El Djir", "Es Senia"],
+          "El Bayadh": ["El Bayadh Centre", "Boualem", "Brezina"],
+          "Relizane": ["Relizane Centre", "Mazouna", "Oued Rhiou"],
+          "Chlef": ["Chlef Centre", "El Karimia", "Ténès"],
+          "Tlemcen": ["Tlemcen Centre", "Maghnia", "Beni Snous"],
+          "Saïda": ["Saïda Centre", "Aïn Soltane", "Doui Thabet"],
+          "Tiaret": ["Tiaret Centre", "Aïn Deheb", "Mechraa Sfa"],
+          "Aïn Témouchent": ["Aïn Témouchent Centre", "Aïn Kihal", "El Malah"]
+        },
+      "South": {
+        "Béchar": ["Béchar Centre", "Béni Abbès", "Mogheul"],
+        "Tindouf": ["Tindouf Centre", "Oum El Assel", "Béchar El Oued"],
+        "El Oued": ["El Oued Centre", "Guemar", "El M'Ghair"],
+        "Khenchela": ["Khenchela Centre", "Babar", "El Hamma"],
+        "Souk Ahras": ["Souk Ahras Centre", "M'Sila El Hadjadj", "Taoura"],
+        "Tipaza": ["Tipaza Centre", "Hadjout", "Gouraya"],
+        "Mila": ["Mila Centre", "Tassadane Haddada", "Grarem Gouga"],
+        "Ghardaïa": ["Ghardaïa Centre", "Metlili", "El Guerrara"],
+        "Laghouat": ["Laghouat Centre", "Ksar El Hirane", "Bordj Belounis"],
+        "Ouargla": ["Ouargla Centre", "Aïn El Beida", "N'Goussa"]
+      }
+  }
+     -->
