@@ -1,0 +1,8 @@
+[
+{
+  "directory": "E:/ENMS/build",
+  "command": "C:\\PROGRA~2\\Dev-Cpp\\MinGW64\\bin\\G__~1.EXE  @CMakeFiles/CrowSample.dir/includes_CXX.rsp -g -o CMakeFiles\\CrowSample.dir\\Website\\main.cpp.obj -c E:\\ENMS\\Website\\main.cpp",
+  "file": "E:/ENMS/Website/main.cpp",
+  "output": "CMakeFiles/CrowSample.dir/Website/main.cpp.obj"
+}
+]
