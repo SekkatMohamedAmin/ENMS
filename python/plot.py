@@ -47,11 +47,11 @@ def plot_bar_chart():
     plt.ylabel('Values')
     plt.title('Bar Chart Example')
 
-    # Show the plot
+    # Show the plot    
     
 
 # Call the function to plot the bar chart
 plot_bar_chart()
 
 
-plot.savefig(char)
+plt.savefig("/home/btwist/Desktop/crow/python/char")

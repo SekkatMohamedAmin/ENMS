@@ -1,0 +1,3 @@
+"E:\Program Files\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E rm -f CMakeFiles\CrowSample.dir/objects.a
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\ar.exe qc CMakeFiles\CrowSample.dir/objects.a @CMakeFiles\CrowSample.dir\objects1.rsp
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\CrowSample.dir/objects.a -Wl,--no-whole-archive -o CrowSample.exe -Wl,--out-implib,libCrowSample.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\CrowSample.dir\linkLibs.rsp
